@@ -145,13 +145,13 @@ const App = () => {
   };
 
   return (
-    <div class={`min-h-screen w-full transition-colors duration-300 ${darkMode() ? 'dark bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-800'}`}>
+    <div class={`min-h-screen w-full ${darkMode() ? 'dark bg-gray-900 text-white' : 'bg-white text-black'}`}>
       <div class="container mx-auto px-4 py-6 max-w-md">
-        <header class={`flex justify-between items-center mb-6 p-4 rounded-lg shadow-md ${darkMode() ? 'bg-gray-800' : 'bg-white'}`}>
+        <header class={`flex justify-between items-center mb-6 p-4 border-b ${darkMode() ? 'border-gray-700' : 'border-gray-300'}`}>
           <h1 class="text-xl font-bold">素因数分解アプリ</h1>
           <button
             onClick={toggleDarkMode}
-            class={`p-2 rounded-full ${darkMode() ? 'bg-gray-700 text-yellow-300' : 'bg-gray-200 text-gray-700'}`}
+            class={`p-2 ${darkMode() ? 'bg-gray-800 text-white' : 'bg-gray-200 text-black'}`}
             aria-label={darkMode() ? 'ライトモードに切り替え' : 'ダークモードに切り替え'}
           >
             {darkMode() ?
@@ -165,26 +165,26 @@ const App = () => {
           </button>
         </header>
 
-        <main class="flex flex-col space-y-6">
-          <div class={`p-4 rounded-lg shadow-md ${darkMode() ? 'bg-gray-800' : 'bg-white'}`}>
+        <main class="flex flex-col space-y-4">
+          <div class={`p-4 border ${darkMode() ? 'border-gray-700' : 'border-gray-300'}`}>
             <div class="space-y-3">
               <input
                 type="number"
                 value={inputValue()}
                 onInput={(e) => setInputValue(e.currentTarget.value)}
                 placeholder="2以上の整数を入力"
-                class={`w-full p-3 text-center rounded-lg border text-lg ${darkMode() ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'}`}
+                class={`w-full p-2 border text-lg ${darkMode() ? 'bg-gray-800 border-gray-700 text-white' : 'bg-white border-gray-300 text-black'}`}
               />
               <div class="grid grid-cols-2 gap-3">
                 <button
                   onClick={handleFactorize}
-                  class="p-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition duration-200"
+                  class={`p-2 border ${darkMode() ? 'bg-gray-800 border-gray-700 text-white hover:bg-gray-700' : 'bg-gray-100 border-gray-300 hover:bg-gray-200'}`}
                 >
                   計算
                 </button>
                 <button
                   onClick={clearInput}
-                  class="p-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-medium transition duration-200"
+                  class={`p-2 border ${darkMode() ? 'bg-gray-800 border-gray-700 text-white hover:bg-gray-700' : 'bg-gray-100 border-gray-300 hover:bg-gray-200'}`}
                 >
                   クリア
                 </button>
@@ -193,20 +193,20 @@ const App = () => {
           </div>
 
           <Show when={error()}>
-            <div class={`p-4 rounded-lg ${darkMode() ? 'bg-red-900 text-red-200' : 'bg-red-100 text-red-800'} text-center`}>
+            <div class={`p-4 border ${darkMode() ? 'border-gray-700 bg-gray-800' : 'border-gray-300 bg-gray-100'} text-center`}>
               {error()}
             </div>
           </Show>
 
           <Show when={currentNumber() !== null && factors().length > 0 && !error()}>
-            <div class={`p-4 rounded-lg shadow-md ${darkMode() ? 'bg-gray-800' : 'bg-white'} animate-fadeIn`}>
-              <h2 class={`text-lg font-medium pb-2 mb-2 border-b ${darkMode() ? 'border-gray-700' : 'border-gray-200'}`}>
+            <div class={`p-4 border ${darkMode() ? 'border-gray-700' : 'border-gray-300'}`}>
+              <h2 class={`text-lg font-medium pb-2 mb-2 border-b ${darkMode() ? 'border-gray-700' : 'border-gray-300'}`}>
                 {currentNumber()} の素因数分解:
               </h2>
-              <p class={`p-2 my-2 rounded-md ${darkMode() ? 'bg-gray-700' : 'bg-gray-100'} break-words`}>
+              <p class={`p-2 my-2 ${darkMode() ? 'bg-gray-800' : 'bg-gray-100'} break-words`}>
                 {currentNumber()} = {factors().join(' × ')}
               </p>
-              <p class={`p-2 my-2 rounded-md ${darkMode() ? 'bg-gray-700' : 'bg-gray-100'} break-words`}>
+              <p class={`p-2 my-2 ${darkMode() ? 'bg-gray-800' : 'bg-gray-100'} break-words`}>
                 {currentNumber()} = {
                   groupedFactors().map(({ prime, exponent }, index) => (
                     <>
@@ -220,21 +220,21 @@ const App = () => {
           </Show>
 
           <Show when={calculationHistory.length > 0}>
-            <div class={`p-4 rounded-lg shadow-md ${darkMode() ? 'bg-gray-800' : 'bg-white'}`}>
+            <div class={`p-4 border ${darkMode() ? 'border-gray-700' : 'border-gray-300'}`}>
               <h2 class="text-lg font-medium mb-3">計算履歴</h2>
               <ul class="space-y-2">
                 <For each={calculationHistory}>
                   {(item, index) => (
-                    <li class={`flex justify-between items-center p-3 rounded-lg ${darkMode() ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-100 hover:bg-gray-200'} transition duration-200`}>
+                    <li class={`flex justify-between items-center p-3 ${darkMode() ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-100 hover:bg-gray-200'}`}>
                       <span
-                        class="text-blue-500 font-medium cursor-pointer overflow-hidden text-ellipsis"
+                        class="cursor-pointer overflow-hidden text-ellipsis"
                         onClick={() => recalculate(item.number)}
                       >
                         {item.number} = {item.factorization}
                       </span>
                       <button
                         onClick={() => removeFromHistory(index())}
-                        class="text-red-500 hover:text-red-600 transition duration-200"
+                        class="hover:underline"
                         aria-label="履歴から削除"
                       >
                         削除
@@ -247,7 +247,7 @@ const App = () => {
           </Show>
         </main>
 
-        <footer class="mt-8 pt-4 text-center text-sm opacity-70">
+        <footer class={`mt-8 pt-4 text-center text-sm border-t ${darkMode() ? 'border-gray-700' : 'border-gray-300'}`}>
           © {new Date().getFullYear()} 素因数分解アプリ
         </footer>
       </div>
